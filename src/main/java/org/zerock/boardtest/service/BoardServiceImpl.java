@@ -48,6 +48,15 @@ public class BoardServiceImpl implements BoardService{
     }
 
     @Override
+    public void insert(BoardDTO boardDTO) {
+        boardMapper.insert(Board.builder()
+                        .title(boardDTO.getTitle())
+                        .content(boardDTO.getContent())
+                        .writer(boardDTO.getWriter())
+                .build());
+    }
+
+    @Override
     public void update(BoardDTO boardDTO) {
 
         boardMapper.update(Board.builder()
@@ -55,7 +64,6 @@ public class BoardServiceImpl implements BoardService{
                         .title(boardDTO.getTitle()).
                         content(boardDTO.getContent())
                 .build());
-
     }
 
     @Override

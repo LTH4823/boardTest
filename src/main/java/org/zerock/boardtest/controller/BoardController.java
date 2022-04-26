@@ -48,8 +48,6 @@ public class BoardController{
 
     }
 
-
-
     @GetMapping("/")
     public String basic(){
         return "redirect:/board/list";
@@ -76,9 +74,7 @@ public class BoardController{
     }
 
     @GetMapping("/register")
-    public void registerGET(){
-
-    }
+    public void registerGET(){}
 
     @PostMapping("/register")
     public String registerPOST(BoardDTO boardDTO, RedirectAttributes rttr){
@@ -90,9 +86,12 @@ public class BoardController{
 //        return "redirect:/board/list?result=123";
 
         // 보내고 데이터 사라짐
-        rttr.addFlashAttribute("result",123);
-        // 보내고 데이터 유지됨됨
+//        rttr.addFlashAttribute("result",123);
+//        // 보내고 데이터 유지됨됨
        //        rttr.addAttribute("num",321);
+
+        boardService.insert(boardDTO);
+        rttr.addFlashAttribute("result", "insert");
 
         return "redirect:/board/list";
     }

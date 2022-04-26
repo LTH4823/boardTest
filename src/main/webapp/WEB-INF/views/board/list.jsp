@@ -235,12 +235,7 @@
     <!-- Begin Page Content -->
     <div class="container-fluid">
 
-        <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Tables</h1>
-        <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-            For more information about DataTables, please visit the <a target="_blank"
-                                                                       href="https://datatables.net">official DataTables
-                documentation</a>.</p>
+        <button type="button" class="btn btn-outline-primary"><a href="/board/register">Add</a></button>
 
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
@@ -299,7 +294,6 @@
                                         <li class="paginate_button page-item"><a class="page-link"
                                                                                  href="${num}">${num}</a></li>
                                     </c:forEach>
-
                                     <c:if test="${pageMaker.next}">
                                         <li class="paginate_button page-item" id="dataTable_next">
                                             <a class="page-link" href="${pageMaker.end+1}" aria-label="Next">

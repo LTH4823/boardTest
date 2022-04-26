@@ -1,18 +1,19 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: peter
-  Date: 2022-04-25
-  Time: 오전 1:08
-  To change this template use File | Settings | File Templates.
---%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ include file="/WEB-INF/includes/header.jsp" %>
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
-    ${listDTO}
-    ${dto}
+<%--    ${listDTO}--%>
+    ${dto}<br>
+    ${dto.title}<br>
+    ${dto.content}<br>
+    ${dto.writer}<br>
+    ${dto.regDate}<br>
+    ${dto.updateDate}<br>
 
 <button class="listBtn">리스트</button>
 <button class="modBtn">수정/삭제</button>
@@ -30,3 +31,4 @@
             },false)
 </script>
 </html>
+<%@ include file="/WEB-INF/includes/footer.jsp" %>

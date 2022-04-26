@@ -13,6 +13,8 @@ public interface BoardService {
 
     BoardDTO getOne(Integer bno);
 
+    void insert(BoardDTO boardDTO);
+
     void update(BoardDTO boardDTO);
 
     void remove(Integer bno);
