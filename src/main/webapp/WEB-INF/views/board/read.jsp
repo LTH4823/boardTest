@@ -1,7 +1,6 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="/WEB-INF/includes/header.jsp" %>
 <html>
 <head>
     <title>Title</title>
@@ -31,4 +30,3 @@
             },false)
 </script>
 </html>
-<%@ include file="/WEB-INF/includes/footer.jsp" %>
