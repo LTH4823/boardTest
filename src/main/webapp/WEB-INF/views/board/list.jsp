@@ -36,14 +36,19 @@
                 <span> ${board.bno} </span>
     <%--            전 방법--%>
     <%--            <span><a href='/board/read${listDTO.link}&bno=${board.bno}'> ${board.title}</a></span>--%>
-                <span><a href='/board/read/${board.bno}' class="dtoLink"> <c:out value="${board.title}"></c:out></a></span>
+                <span>
+                    <a href='/board/read/${board.bno}' class="dtoLink">
+                    <c:out value="${board.title}"></c:out></a>
+                </span>
+                <span> ${board.content} </span>
+                <span> ${board.writer} </span>
             </li>
         </c:forEach>
     </ul>
 
 
     ${pageMaker}
-
+    <div><a href="/board/register">add</a></div>
 
         <div class="col-sm-12 col-md-7">
             <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
