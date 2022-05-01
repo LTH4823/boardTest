@@ -5,6 +5,7 @@
 
     <typeAliases>
         <typeAlias type="org.zerock.boardtest.domain.Board" alias="Board"/>
+        <typeAlias type="org.zerock.boardtest.domain.Reply" alias="Reply"/>
     </typeAliases>
 
 </configuration>
