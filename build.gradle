@@ -69,10 +69,14 @@ dependencies {
 
     //Model Mapper
     // https://mvnrepository.com/artifact/org.modelmapper/modelmapper
-    implementation 'org.modelmapper:modelmapper:3.1.0'
+     implementation 'org.modelmapper:modelmapper:3.1.0'
 
+    //jackson-datagind
     // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.2.2'
+    //jackson-datatype
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.2'
 
 
 }
