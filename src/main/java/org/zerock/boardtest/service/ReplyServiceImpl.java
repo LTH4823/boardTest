@@ -1,0 +1,33 @@
+package org.zerock.boardtest.service;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Service;
+import org.zerock.boardtest.domain.Reply;
+import org.zerock.boardtest.dto.ReplyDTO;
+import org.zerock.boardtest.mapper.ReplyMapper;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Service
+@RequiredArgsConstructor
+@Log4j2
+public class ReplyServiceImpl implements ReplyService{
+
+    private final ModelMapper modelMapper;
+    private final ReplyMapper replyMapper;
+
+    @Override
+    public List<ReplyDTO> getListOfBoard(Integer bno) {
+
+        List<Reply> replyList = replyMapper.selectListOfBoard(bno);
+
+        List<ReplyDTO> dtoList = replyList.stream()
+                .map(reply -> modelMapper.map(reply,ReplyDTO.class))
+                .collect(Collectors.toList());
+
+        return dtoList;
+    }
+}
