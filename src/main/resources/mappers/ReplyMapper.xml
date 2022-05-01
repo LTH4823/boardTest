@@ -5,8 +5,8 @@
 
 <mapper namespace="org.zerock.boardtest.mapper.ReplyMapper">
 
-    <select id="selectList" resultType="Reply" >
-        select * from tbl_reply where bno = #{bno} order by rn asc
+    <select id="selectListOfBoard" resultType="Reply" >
+        select * from tbl_reply where bno = #{bno} order by rno asc
     </select>
 
 </mapper>
