@@ -40,5 +40,50 @@
 
 </form>
 
+<div>
+    <h2>Ajax Upload</h2>
+    <input type="file" name="upload" multiple class="uploadFile">
+    <button class="uploadBtn">UPLOAD</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script>
+
+    document.querySelector(".uploadBtn").addEventListener("click",(e)=>{
+
+        const formObj = new FormData()
+
+        const fileInput = document.querySelector(".uploadFile")
+
+        console.log(fileInput.files)
+        const files = fileInput.files
+        for (let i = 0; i < files.length; i++) {
+            console.log(files[i])
+            formObj.append("files",files[i])
+        }
+
+        uploadToServer(formObj)
+
+    },false)
+
+    async function uploadToServer(formObj){
+        console.log("upload to server......")
+        console.log(formObj)
+
+        const response = await axios({
+            method:'post',
+            url: '/upload1',
+            data: formObj,
+            headers:{
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+        return response.data
+    }
+
+
+</script>
+
 </body>
 </html>
