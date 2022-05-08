@@ -78,6 +78,16 @@ dependencies {
     // https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.2'
 
+    //aspectj-runtime
+    //아래의 implementation이 runtimeOnly로 되어있을 시 이는 실행 중에만 임폴트 된다는 뜻이 된다.
+    // https://mvnrepository.com/artifact/org.aspectj/aspectjrt
+    implementation 'org.aspectj:aspectjrt:1.9.9.1'
+
+    //aspectj-weaver
+    // https://mvnrepository.com/artifact/org.aspectj/aspectjweaver
+    implementation 'org.aspectj:aspectjweaver:1.9.9.1'
+
+
 
 }
 
