@@ -17,6 +17,18 @@
 </div>
 
 <div>
+    <div>
+        <input type="text" name="replyText" value="샘플">
+    </div>
+    <div>
+        <input type="text" name="replyer" value="sampleUser">
+    </div>
+    <div>
+        <button class="addReplyBtn">댓글추가</button>
+    </div>
+</div>
+
+<div>
     <ul class="replyUL">
 
     </ul>
@@ -25,6 +37,28 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 <script>
+
+    const bno = ${dto.bno}
+
+    document.querySelector(".addReplyBtn").addEventListener("click",(e)=>{
+
+        const replyTextInput = document.querySelector("input[replyText]")
+        const replyerInput = document.querySelector("input[replyer]")
+
+        const replyText = replyTextInput.value;
+        const replyer = replyerInput.value;
+
+        const reply = {bno,replyText,replyer}
+
+        console.log(reply)
+
+    },false)
+
+    async function sendPost(reply){
+        const res = await axios.post(`/replies/`,reply)
+
+        console.log(res)
+    }
 
     async function getReplyList(bno){
 
@@ -40,7 +74,7 @@
 
     }
 
-    const bno = ${dto.bno}
+
 
         getReplyList(bno)
             .then(arr => {

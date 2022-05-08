@@ -19,12 +19,14 @@ public class ReplyController {
     private final ReplyService replyService;
 
     @PostMapping("/")
-    public Map<String, Integer> register(@RequestBody ReplyDTO replyDTO){
+    public Map<String, String> register(@RequestBody ReplyDTO replyDTO){
 
         log.info("===========================");
         log.info(replyDTO);
 
-        return Map.of("result", 143);
+        replyService.register(replyDTO);
+
+        return Map.of("result", "success");
 
     }
 
