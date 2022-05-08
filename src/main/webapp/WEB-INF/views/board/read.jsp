@@ -42,8 +42,10 @@
 
     document.querySelector(".addReplyBtn").addEventListener("click",(e)=>{
 
-        const replyTextInput = document.querySelector("input[replyText]")
-        const replyerInput = document.querySelector("input[replyer]")
+        const replyTextInput = document.querySelector("input[name=replyText]")
+        const replyerInput = document.querySelector("input[name=replyer]")
+
+        console.log(replyerInput)
 
         const replyText = replyTextInput.value;
         const replyer = replyerInput.value;
@@ -51,6 +53,8 @@
         const reply = {bno,replyText,replyer}
 
         console.log(reply)
+
+        sendPost(reply)
 
     },false)
 
@@ -73,9 +77,6 @@
         }
 
     }
-
-
-
         getReplyList(bno)
             .then(arr => {
 
