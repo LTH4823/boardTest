@@ -13,7 +13,7 @@ public class Reply {
     private Integer rno;
     private Integer bno;
     private String replyText;
-    private String rpelyer;
+    private String replyer;
     private LocalDate regDate;
     private LocalDate updateDate;
 }

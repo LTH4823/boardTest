@@ -71,4 +71,8 @@
         where bno = #{bno}
     </update>
 
+    <update id="updateReplyCount">
+        update tbl_board set replyCount =replyCount + #{amount} where bno = #{bno}
+    </update>
+
 </mapper>
