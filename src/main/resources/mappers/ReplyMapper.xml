@@ -13,5 +13,11 @@
         insert into tbl_reply (bno, replyText, replyer)
         values (#{bno}, #{replyText}, #{replyer})
     </insert>
+    <select id="selectTotalOfBoard" resultType="int">
+        select count(rno) from tbl_reply where bno = #{bno} and rno > 0
+    </select>
 
+    <update id="updateAsRemoved">
+        update tbl_reply set replyText ='DELETED', updateDate = now() where rno = #{rno}
+    </update>
 </mapper>

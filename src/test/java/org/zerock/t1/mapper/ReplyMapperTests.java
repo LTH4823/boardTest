@@ -6,6 +6,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.zerock.boardtest.dto.ListDTO;
 import org.zerock.boardtest.mapper.ReplyMapper;
 
 @Log4j2
@@ -18,7 +19,15 @@ public class ReplyMapperTests {
 
     @Test
     public void testList1(){
+//        Integer bno = 116;
+//        replyMapper.selectListOfBoard(bno).forEach(reply -> log.info(reply));
+
         Integer bno = 116;
-        replyMapper.selectListOfBoard(bno).forEach(reply -> log.info(reply));
+
+        ListDTO listDTO = new ListDTO();
+        listDTO.setPage(2);
+        listDTO.setSize(10);
+
+        replyMapper.selectListOfBoard(bno, listDTO).forEach(reply -> log.info(reply));
     }
 }

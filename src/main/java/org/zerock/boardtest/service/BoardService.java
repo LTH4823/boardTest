@@ -19,4 +19,6 @@ public interface BoardService {
 
     void remove(Integer bno);
 
+
+
 }
