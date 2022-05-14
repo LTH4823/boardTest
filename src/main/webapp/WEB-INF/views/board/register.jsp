@@ -42,7 +42,9 @@
 
 <div>
     <h2>Ajax Upload</h2>
-    <input type="file" name="upload" multiple class="uploadFile">
+    <div class="uploadInputDiv">
+        <input type="file" name="upload" multiple class="uploadFile">
+    </div>
     <button class="uploadBtn">UPLOAD</button>
 </div>
 
@@ -55,19 +57,25 @@
 <script>
 
     const uploadResult = document.querySelector(".uploadResult")
+    const cloneInput = document.querySelector(".uploadFile").cloneNode()
+    const uploadInputDiv = document.querySelector(".uploadInputDiv")
 
     uploadResult.addEventListener("click", (e) => {
 
-        if(e.target.getAttribute("class").indexOf("delBtn") < 0){
+        if (e.target.getAttribute("class").indexOf("delBtn") < 0) {
             return
         }
-        const link = e.target.getAttribute("data-link")
 
-        alert(link)
+        const btn = e.target;
+        const link = btn.getAttribute("data-link")
+
+        deleteToServer(link).then(result => {
+            btn.closest("div").remove()
+        })
 
     }, false)
 
-    document.querySelector(".uploadBtn").addEventListener("click",(e)=> {
+    document.querySelector(".uploadBtn").addEventListener("click", (e) => {
 
         const formObj = new FormData();
 
@@ -82,18 +90,31 @@
             formObj.append("files", files[i])
         }
 
+
         uploadToServer(formObj).then(resultArr => {
 
-            uploadResult.innerHTML = resultArr.map(result => `<div>
+            uploadResult.innerHTML += resultArr.map(result => `<div>
                 <img src='/view?fileName=\${result.thumbnail}'>
                 <button data-link='\${result.link}' class="delBtn">x</button>
                 \${result.original}</div>`).join(" ")
+
+            fileInput.remove()
+            document.querySelector(".uploadInputDiv").appendChild(cloneInput.cloneNode())
         })
 
     }, false)
 
+    async function deleteToServer(fileName) {
+        const options = {header: {"Content-Type": "application/x-www-form-urlencoded"}}
 
-    async function uploadToServer (formObj) {
+        const res = await axios.post("/delete", "fileName=" + fileName, options)
+
+        console.log(res.data)
+
+
+    }
+
+    async function uploadToServer(formObj) {
 
         console.log("upload to server......")
         console.log(formObj)

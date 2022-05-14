@@ -16,6 +16,7 @@ import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Controller
@@ -49,6 +50,28 @@ public class UploadController {
         }
 
 
+    }
+
+    @PostMapping("delete")
+    @ResponseBody
+    public Map<String, String> deleteFile(String fileName){
+        int idx = fileName.lastIndexOf("/");
+        String path = fileName.substring(0,idx);
+        String name = fileName.substring(idx+1);
+        log.info("path: " + path);
+        log.info("name: " + name);
+
+        File targetFile = new File("C:\\upload\\"+fileName);
+
+        boolean result = targetFile.delete();
+
+        //thumbnail
+        if(result){
+            File thumbFile = new File("C:\\upload\\"+path+"\\s_"+name);
+            thumbFile.delete();
+        }
+
+        return Map.of("result", "success");
     }
 
     @PostMapping("/upload1")
