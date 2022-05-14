@@ -46,42 +46,69 @@
     <button class="uploadBtn">UPLOAD</button>
 </div>
 
+<div class="uploadResult">
+
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 <script>
 
-    document.querySelector(".uploadBtn").addEventListener("click",(e)=>{
+    const uploadResult = document.querySelector(".uploadResult")
 
-        const formObj = new FormData()
+    uploadResult.addEventListener("click", (e) => {
+
+        if(e.target.getAttribute("class").indexOf("delBtn") < 0){
+            return
+        }
+        const link = e.target.getAttribute("data-link")
+
+        alert(link)
+
+    }, false)
+
+    document.querySelector(".uploadBtn").addEventListener("click",(e)=> {
+
+        const formObj = new FormData();
 
         const fileInput = document.querySelector(".uploadFile")
 
         console.log(fileInput.files)
+
         const files = fileInput.files
+
         for (let i = 0; i < files.length; i++) {
             console.log(files[i])
-            formObj.append("files",files[i])
+            formObj.append("files", files[i])
         }
 
-        uploadToServer(formObj)
+        uploadToServer(formObj).then(resultArr => {
 
-    },false)
+            uploadResult.innerHTML = resultArr.map(result => `<div>
+                <img src='/view?fileName=\${result.thumbnail}'>
+                <button data-link='\${result.link}' class="delBtn">x</button>
+                \${result.original}</div>`).join(" ")
+        })
 
-    async function uploadToServer(formObj){
+    }, false)
+
+
+    async function uploadToServer (formObj) {
+
         console.log("upload to server......")
         console.log(formObj)
 
         const response = await axios({
-            method:'post',
+            method: 'post',
             url: '/upload1',
             data: formObj,
-            headers:{
+            headers: {
                 'Content-Type': 'multipart/form-data',
             },
         });
+
         return response.data
     }
-
 
 </script>
 
