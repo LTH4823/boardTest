@@ -1,12 +1,14 @@
 package org.zerock.boardtest.controller;
 
 import lombok.extern.log4j.Log4j2;
+import net.coobird.thumbnailator.Thumbnails;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.UUID;
 
@@ -22,12 +24,18 @@ public class UploadController {
         for (MultipartFile file : files) {
 //            log.info(file.getOriginalFilename());
             String originalFileName = file.getOriginalFilename();
+
+            log.info(file.getContentType());
+            boolean img = file.getContentType().startsWith("image");
+
 //            log.info(file.getResource());
             //uuid -> 파일 앞에 랜덤아이디값 지정 해줌 -> 파일 분간 및 보안 위하여 사용
             String saveName = UUID.randomUUID().toString()+"_"+ originalFileName;
 
             log.info(file.getResource());
             String saveFolder = makeFolders();
+
+            File savFile = new File("C:\\upload\\"+saveFolder+"\\"+saveName);
 
             try (
                     //업로드할 파일 정보를 받기 위한 inputStream
@@ -42,8 +50,24 @@ public class UploadController {
 
                 FileCopyUtils.copy(in,fos);
 
+
+
+
             } catch (IOException e) {
                 e.printStackTrace();
+            }
+
+            if(img){
+                //saveName = UUID+"_"+fileName
+                String thumbFileName = saveFolder+"\\s_"+saveName;
+                File thumbFile = new File("C:\\upload\\"+thumbFileName);
+                try {
+                    Thumbnails.of(savFile)
+                            .size(200, 200)
+                            .toFile(thumbFile);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
 
             log.info("------------------------------");
