@@ -5,11 +5,15 @@ import net.coobird.thumbnailator.Thumbnails;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.zerock.boardtest.dto.UploadResultDTO;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -17,9 +21,15 @@ import java.util.UUID;
 public class UploadController {
 
     @PostMapping("/upload1")
-    public void upload1(MultipartFile[] files) {
+    @ResponseBody
+    public List<UploadResultDTO> upload1(MultipartFile[] files) {
+
         log.info("======================");
+
         log.info(files);
+
+        List<UploadResultDTO> list = new ArrayList<>();
+
         //업로드된 파일이 있다고 가정
         for (MultipartFile file : files) {
 //            log.info(file.getOriginalFilename());
@@ -28,9 +38,11 @@ public class UploadController {
             log.info(file.getContentType());
             boolean img = file.getContentType().startsWith("image");
 
+            String uuid = UUID.randomUUID().toString();
+
 //            log.info(file.getResource());
             //uuid -> 파일 앞에 랜덤아이디값 지정 해줌 -> 파일 분간 및 보안 위하여 사용
-            String saveName = UUID.randomUUID().toString()+"_"+ originalFileName;
+            String saveName = uuid.toString()+"_"+ originalFileName;
 
             log.info(file.getResource());
             String saveFolder = makeFolders();
@@ -70,8 +82,17 @@ public class UploadController {
                 }
             }
 
+            list.add(UploadResultDTO.builder()
+                    .original(originalFileName)
+                    .uuid(uuid)
+                    .img(img)
+                    .savePath(saveFolder)
+                    .build());
+
             log.info("------------------------------");
         }
+
+        return list;
     }
 
     //저장할 파일들의 폴더 위치 생성
