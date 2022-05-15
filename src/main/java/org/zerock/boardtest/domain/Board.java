@@ -15,6 +15,8 @@ public class Board {
     private String content;
     private String writer;
 
+    private String mainImage;
+
     private LocalDate regDate;
     private LocalDate updateDate;
 }

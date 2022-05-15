@@ -18,6 +18,8 @@ public class BoardDTO {
     private String content;
     private String writer;
 
+    private String mainImage;
+
     private List<UploadResultDTO> uploads = new ArrayList<>();
 
     private LocalDate regDate;
