@@ -96,7 +96,7 @@
             uploadResult.innerHTML += resultArr.map(result => `<div>
                 <img src='/view?fileName=\${result.thumbnail}'>
                 <button data-link='\${result.link}' class="delBtn">x</button>
-                \${result.original}</div>`).join(" ")
+                \${result.fileName}</div>`).join(" ")
 
             fileInput.remove()
             document.querySelector(".uploadInputDiv").appendChild(cloneInput.cloneNode())

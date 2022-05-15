@@ -1,5 +1,6 @@
 package org.zerock.boardtest.controller;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import net.coobird.thumbnailator.Thumbnails;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.zerock.boardtest.dto.UploadResultDTO;
+import org.zerock.boardtest.service.FileService;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -21,8 +23,10 @@ import java.util.UUID;
 
 @Controller
 @Log4j2
+@RequiredArgsConstructor
 public class UploadController {
 
+    private final FileService fileService;
 
     @GetMapping("/view")
     public ResponseEntity<byte[]> viewFile(String fileName){
@@ -122,12 +126,15 @@ public class UploadController {
                 }
             }
 
-            list.add(UploadResultDTO.builder()
-                    .original(originalFileName)
+            UploadResultDTO uploadResultDTO = UploadResultDTO.builder()
+                    .fileName(originalFileName)
                     .uuid(uuid)
                     .img(img)
                     .savePath(saveFolder)
-                    .build());
+                    .build();
+
+            list.add(uploadResultDTO);
+            fileService.register(uploadResultDTO);
 
             log.info("--------------------------");
 

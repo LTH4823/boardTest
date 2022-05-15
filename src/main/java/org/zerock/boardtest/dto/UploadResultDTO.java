@@ -13,16 +13,16 @@ import lombok.NoArgsConstructor;
 public class UploadResultDTO {
 
     private String uuid;
-    private String original;
+    private String fileName;
     private String savePath;
     private boolean img;
 
     public String getLink(){
-        return savePath+"/"+uuid+"_"+original;
+        return savePath+"/"+uuid+"_"+fileName;
     }
 
     public String getThumbnail(){
-        return savePath+"/s_"+uuid+"_"+original;
+        return savePath+"/s_"+uuid+"_"+fileName;
     }
 
 }
