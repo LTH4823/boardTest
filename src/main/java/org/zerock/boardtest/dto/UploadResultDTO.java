@@ -16,7 +16,7 @@ public class UploadResultDTO {
     private String fileName;
     private String savePath;
     private boolean img;
-
+    
     public String getLink(){
         return savePath+"/"+uuid+"_"+fileName;
     }

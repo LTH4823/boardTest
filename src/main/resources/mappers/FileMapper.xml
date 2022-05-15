@@ -5,8 +5,8 @@
 <mapper namespace="org.zerock.boardtest.mapper.FileMapper">
 
     <insert id="insert">
-        insert into tbl_file(uuid, fileName, savePath, img)
-        values (#{uuid},#{fileName},#{savePath},#{img})
+        insert into tbl_attach(uuid, fileName, savePath, img, bno)
+        values (#{uuid},#{fileName},#{savePath},#{img}, last_insert_id())
     </insert>
 
     <delete id="delete">

@@ -10,6 +10,7 @@ import lombok.*;
 public class AttachFile {
 
     private String uuid;
+    private Integer bno;
     private String fileName;
     private String savePath;
     private boolean img;

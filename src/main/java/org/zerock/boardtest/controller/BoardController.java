@@ -6,12 +6,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.zerock.boardtest.dto.BoardDTO;
-import org.zerock.boardtest.dto.ListDTO;
-import org.zerock.boardtest.dto.ListResponseDTO;
-import org.zerock.boardtest.dto.PageMaker;
+import org.zerock.boardtest.dto.*;
 import org.zerock.boardtest.service.BoardService;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Log4j2
@@ -77,10 +75,12 @@ public class BoardController{
     public void registerGET(){}
 
     @PostMapping("/register")
-    public String registerPOST(BoardDTO boardDTO, RedirectAttributes rttr){
+    //UploadResultDTO[] uploads,
+    public String registerPOST(BoardDTO boardDTO,  RedirectAttributes rttr){
 
         log.info("----------------------");
         log.info(boardDTO);
+
 
         // 단순하게 파라미터 데이터 쏴주는 방벙
 //        return "redirect:/board/list?result=123";
@@ -90,7 +90,9 @@ public class BoardController{
 //        // 보내고 데이터 유지됨됨
        //        rttr.addAttribute("num",321);
 
-        boardService.insert(boardDTO);
+//        boardService.insert(boardDTO);
+        boardService.register(boardDTO);
+
         rttr.addFlashAttribute("result", "insert");
 
         return "redirect:/board/list";

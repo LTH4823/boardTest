@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.zerock.boardtest.dto.UploadResultDTO;
-import org.zerock.boardtest.service.FileService;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -25,8 +24,8 @@ import java.util.UUID;
 @Log4j2
 @RequiredArgsConstructor
 public class UploadController {
-
-    private final FileService fileService;
+//
+//    private final FileService fileService;
 
     @GetMapping("/view")
     public ResponseEntity<byte[]> viewFile(String fileName){
@@ -77,7 +76,7 @@ public class UploadController {
             thumbFile.delete();
         }
 
-        fileService.remove(uuid);
+//        fileService.remove(uuid);
 
         return Map.of("result", "success");
     }
@@ -138,7 +137,8 @@ public class UploadController {
                     .build();
 
             list.add(uploadResultDTO);
-            fileService.register(uploadResultDTO);
+            // 종속 형태로 바뀌면서 삭제
+//            fileService.register(uploadResultDTO);
 
             log.info("--------------------------");
 
