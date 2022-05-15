@@ -61,7 +61,9 @@ public class UploadController {
     public Map<String, String> deleteFile(String fileName){
         int idx = fileName.lastIndexOf("/");
         String path = fileName.substring(0,idx);
-        String name = fileName.substring(idx+1);
+        String name = fileName.substring(idx+1);//uuid_fileName
+        String uuid = name.substring(0,name.indexOf("_"));
+
         log.info("path: " + path);
         log.info("name: " + name);
 
@@ -74,6 +76,8 @@ public class UploadController {
             File thumbFile = new File("C:\\upload\\"+path+"\\s_"+name);
             thumbFile.delete();
         }
+
+        fileService.remove(uuid);
 
         return Map.of("result", "success");
     }

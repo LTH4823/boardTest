@@ -21,4 +21,9 @@ public class FileServiceImpl implements FileService{
 
         fileMapper.insert(attachFile);
     }
+
+    @Override
+    public void remove(String uuid) {
+        fileMapper.delete(uuid);
+    }
 }
